@@ -1,5 +1,7 @@
+import { useState } from "react";
 import Modal from "react-modal";
 import { API_URL } from "../const";
+import { useCart } from "../context/CartContext";
 
 const customStyles = {
   content: {
@@ -15,9 +17,27 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 export const ProductModal = ({ isOpen, onRequestClose, data }) => {
+  const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
+
   if (!data) {
     return null;
   }
+
+  const handleIncrease = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleDecrease = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleAddToCart = () => {
+    addToCart(data, quantity);
+    onRequestClose();
+  };
 
   return (
     <Modal
@@ -27,7 +47,7 @@ export const ProductModal = ({ isOpen, onRequestClose, data }) => {
       contentLabel="Product Modal">
       <h2>{data.title}</h2>
       <img src={`${API_URL}${data.img}`} alt={data.title} />
-      <p>{data.price}</p>
+      <p>{data.price} ₽</p>
       <ul>
         {Object.entries(data.additional).map(([key, value]) => (
           <li key={key}>
@@ -35,6 +55,12 @@ export const ProductModal = ({ isOpen, onRequestClose, data }) => {
           </li>
         ))}
       </ul>
+      <div className="product-modal__controls">
+        <button onClick={handleDecrease}>-</button>
+        <input type="number" value={quantity} readOnly />
+        <button onClick={handleIncrease}>+</button>
+      </div>
+      <button onClick={handleAddToCart}>Добавить в корзину</button>
       <button onClick={onRequestClose}>Закрыть</button>
     </Modal>
   );

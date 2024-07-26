@@ -3,6 +3,7 @@ import { API_URL } from "../const";
 import { ProductModal } from "./ProductModal";
 
 export const Product = ({ data }) => {
+  console.log("data: ", data);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = (event) => {
