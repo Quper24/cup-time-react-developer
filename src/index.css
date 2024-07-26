@@ -449,6 +449,32 @@ input[type="number"] {
   margin-right: 8px;
 }
 
+.skeleton-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f2f9f7;
+}
+
+.skeleton-img {
+  height: 420px;
+  background-color: rgb(108, 185, 171, 0.6);
+}
+
+.skeleton-h {
+  flex-basis: 30px;
+  background-color: rgb(108, 185, 171, 0.6);
+}
+
+.skeleton-p {
+  flex-basis: 25px;
+  background-color: rgb(108, 185, 171, 0.6);
+}
+
+.skeleton-clear {
+  margin: 0;
+}
+
 @media (max-width: 1240px) {
   .container {
     padding: 0 42px;
@@ -513,6 +539,10 @@ input[type="number"] {
 
   .order__form {
     max-width: 620px;
+  }
+
+  .skeleton-img {
+    height: 300px;
   }
 }
 
@@ -680,6 +710,10 @@ input[type="number"] {
 
   .order__payment {
     padding-top: 8px;
+  }
+
+  .skeleton-img {
+    height: 240px;
   }
 }
 
